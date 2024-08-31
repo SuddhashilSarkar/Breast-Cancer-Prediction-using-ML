@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Cancer Prediction</title>
+        <link
+            href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Raleway:wght@600&display=swap"
+            rel="stylesheet"
+        />
+        <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+        
+    </head>
+    <body class="bg-background text-text">
+        <header class="bg-background text-text p-4">
+            <nav class="container mx-auto flex items-center justify-between relative">
+                <!-- Main Text on the Left (Desktop) / Centered (Mobile) -->
+                <div class="flex-1 text-2xl font-bold text-center md:text-left">
+                    <a href="#home" class="hover:text-accent">Cancer Prediction</a>
+                </div>
+
+                <!-- Desktop Navigation Links (Right-Aligned) -->
+                <ul class="hidden md:flex space-x-6 ml-auto">
+                    <li><a href="#about" class="hover:text-accent px-2 py-1">About</a></li>
+                    <li><a href="#disclaimer" class="hover:text-accent px-2 py-1">Disclaimer</a></li>
+                    <li><a href="#learn-more" class="hover:text-accent px-2 py-1">Learn More</a></li>
+                    <li><a href="#open-modal" class="hover:text-accent px-2 py-1">Prediction Tool</a></li>
+                    <li>
+                        <!-- GitHub Button -->
+                        <a href="https://github.com/SuddhashilSarkar/Breast-Cancer-Prediction-using-ML" class="flex items-center space-x-1 bg-primary rounded-lg hover:bg-accent transition-colors px-2 py-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-github" viewBox="0 0 16 16">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"/>
+                            </svg>
+                            <span class="text-accent">GitHub</span>
+                        </a>
+
+                    </li>
+                </ul>
+
+                <!-- Mobile Menu Button -->
+                <button id="menu-btn" class="md:hidden text-2xl absolute top-1/2 transform -translate-y-1/2 left-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
+                    </svg>
+                </button>
+            </nav>
+
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="md:hidden fixed inset-0 bg-background bg-opacity-80 z-50 hidden">
+                <div class="flex flex-col items-center justify-center py-6">
+                    <button id="close-menu" class="absolute top-4 left-4 text-2xl text-text">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                    <a href="#about" class="text-text text-2xl py-2 hover:bg-accent px-4 rounded">About</a>
+                    <a href="#disclaimer" class="text-text text-2xl py-2 hover:bg-accent px-4 rounded">Disclaimer</a>
+                    <a href="#learn-more" class="text-text text-2xl py-2 hover:bg-accent px-4 rounded">Learn More</a>
+                    <a href="#open-modal" class="text-text text-2xl py-2 hover:bg-accent px-4 rounded">Prediction Tool</a>
+                    <a href="https://github.com/SuddhashilSarkar/Breast-Cancer-Prediction-using-ML" class="flex items-center space-x-1 bg-primary rounded-lg hover:bg-accent transition-colors px-2 py-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-github" viewBox="0 0 16 16">
+                            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"/>
+                        </svg>
+                        <span class="text-text text-2xl py-1 hover:bg-accent ">GitHub</span>
+                    </a>
+                </div>
+            </div>
+        </header>
+
+
+        <section id="home" class="bg-primary text-text text-center py-20">
+            <h1 class="text-4xl font-raleway font-bold">
+                Welcome to Cancer Prediction
+            </h1>
+            <p class="mt-4 text-lg font-raleway">
+                Empowering early detection through technology.
+            </p>
+            <a
+                    id="open-modal"
+                    href="#nowhere"
+                    class="mt-6 inline-block bg-secondary text-text py-2 px-4 rounded border-2 border-accent hover:bg-accent hover:text-white"
+                >
+                    Try the Prediction Tool
+                </a>
+        </section>
+
+        <section
+            id="about"
+            class="container mx-auto my-10 p-6 bg-background rounded"
+        >
+            <h2 class="text-2xl font-raleway font-semibold mb-4 text-primary">
+                About the Project
+            </h2>
+            <p class="font-raleway">
+                <strong>Cancer Prediction Using Machine Learning</strong> is designed to enhance early breast cancer detection through advanced machine learning techniques. This project utilizes a Support Vector Machine (SVM) with a Radial Basis Function (RBF) kernel to accurately classify breast tumors as malignant or benign. <br>
+
+                With an accuracy of 88%, this model analyzes clinical data to assist healthcare professionals in making informed decisions. Key features include high accuracy, clear visualizations of decision boundaries, and an intuitive user interface for easy predictions. This project represents a step forward in applying AI to improve healthcare outcomes.
+            </p>
+        </section>
+
+        <hr class="my-6 border-t border-primary opacity-50">
+
+
+        <section id="disclaimer" class="container mx-auto my-10 p-6 bg-background rounded">
+            <h2 class="text-2xl font-raleway font-semibold mb-4 text-primary">Disclaimer</h2>
+            <p class="font-raleway">
+                The Cancer Prediction Tool is designed for educational and research purposes only. It is not intended for use in clinical diagnostics or medical decision-making. The predictions and insights provided by this tool are based on machine learning models and should not be used as a substitute for professional medical advice, diagnosis, or treatment. Users should consult a qualified healthcare provider for any medical concerns. The creators of this tool assume no responsibility for any outcomes resulting from the use of this tool.
+            </p>
+        </section>
+
+        <hr class="my-6 border-t border-primary opacity-50">
+
+
+
+        <section
+            id="learn-more"
+            class="container mx-auto my-10 p-6 bg-background rounded"
+        >
+            <h2 class="text-2xl font-raleway font-semibold mb-4 text-primary">
+                Learn More About Cancer
+            </h2>
+            <h3 class="text-xl font-raleway font-semibold mt-4">
+                Understanding Cancer
+            </h3>
+            <p class="font-raleway">
+                Cancer is a broad term for a group of diseases characterized by
+                the uncontrolled growth and spread of abnormal cells. If the
+                growth is not controlled, it can result in death. There are over
+                100 different types of cancer, each with its own
+                characteristics, symptoms, and treatment options.
+            </p>
+
+            <h3 class="text-xl font-raleway font-semibold mt-4">
+                Common Types of Cancer
+            </h3>
+            <ul class="list-disc ml-6 font-raleway">
+                <li>
+                    <strong>Breast Cancer:</strong> Affects the cells of the
+                    breast, commonly in women but also in men. Early detection
+                    through mammography is crucial.
+                </li>
+                <li>
+                    <strong>Lung Cancer:</strong> Often associated with smoking,
+                    lung cancer is one of the leading causes of cancer-related
+                    deaths worldwide. Symptoms include coughing, chest pain, and
+                    shortness of breath.
+                </li>
+                <li>
+                    <strong>Prostate Cancer:</strong> A common cancer in men,
+                    affecting the prostate gland. Screening involves a
+                    prostate-specific antigen (PSA) test.
+                </li>
+                <li>
+                    <strong>Colorectal Cancer:</strong> Affects the colon or
+                    rectum. Regular screening, such as a colonoscopy, is
+                    recommended for early detection.
+                </li>
+                <li>
+                    <strong>Skin Cancer:</strong> Includes melanoma and
+                    non-melanoma skin cancers. Prevention includes limiting
+                    exposure to UV radiation.
+                </li>
+            </ul>
+
+            <h3 class="text-xl font-raleway font-semibold mt-4">
+                Symptoms to Watch For
+            </h3>
+            <p class="font-raleway">
+                While symptoms vary depending on the type of cancer, common
+                signs include:
+            </p>
+            <ul class="list-disc ml-6 font-raleway">
+                <li>Unexplained weight loss</li>
+                <li>Persistent fatigue</li>
+                <li>Lumps or swelling in the body</li>
+                <li>Persistent cough or hoarseness</li>
+                <li>Changes in bowel or bladder habits</li>
+                <li>Unusual bleeding or discharge</li>
+            </ul>
+            <p class="font-raleway">
+                It’s important to consult with a healthcare professional if you
+                experience any of these symptoms.
+            </p>
+
+            <h3 class="text-xl font-raleway font-semibold mt-4">
+                Cancer Risk Factors
+            </h3>
+            <p class="font-raleway">
+                Some risk factors for cancer are modifiable, while others are
+                not. Understanding these can help you take preventive measures:
+            </p>
+            <ul class="list-disc ml-6 font-raleway">
+                <li>
+                    <strong>Lifestyle Choices:</strong> Smoking, excessive
+                    alcohol consumption, poor diet, and lack of physical
+                    activity increase the risk of various cancers.
+                </li>
+                <li>
+                    <strong>Environmental Exposure:</strong> Prolonged exposure
+                    to harmful substances like asbestos, radon, or radiation can
+                    increase cancer risk.
+                </li>
+                <li>
+                    <strong>Genetic Factors:</strong> A family history of cancer
+                    can increase your risk. Genetic testing can help identify
+                    specific hereditary risks.
+                </li>
+                <li>
+                    <strong>Age:</strong> The risk of developing cancer
+                    increases with age, with most cases occurring in people over
+                    50.
+                </li>
+            </ul>
+
+            <h3 class="text-xl font-raleway font-semibold mt-4">
+                Cancer Prevention
+            </h3>
+            <p class="font-raleway">
+                While not all cancers can be prevented, you can reduce your risk
+                by:
+            </p>
+            <ul class="list-disc ml-6 font-raleway">
+                <li>
+                    <strong>Avoiding Tobacco:</strong> Smoking is linked to
+                    several types of cancer. Quitting smoking at any age can
+                    significantly lower your risk.
+                </li>
+                <li>
+                    <strong>Maintaining a Healthy Diet:</strong> Eat a balanced
+                    diet rich in fruits, vegetables, and whole grains. Limit red
+                    and processed meats.
+                </li>
+                <li>
+                    <strong>Staying Physically Active:</strong> Regular exercise
+                    helps maintain a healthy weight and reduces the risk of
+                    several types of cancer.
+                </li>
+                <li>
+                    <strong>Protecting Yourself from the Sun:</strong> Use
+                    sunscreen, wear protective clothing, and avoid tanning beds
+                    to reduce the risk of skin cancer.
+                </li>
+                <li>
+                    <strong>Getting Vaccinated:</strong> Vaccinations like the
+                    HPV vaccine can prevent infections that may lead to cancer.
+                </li>
+            </ul>
+
+            <h3 class="text-xl font-raleway font-semibold mt-4">
+                Treatment Options
+            </h3>
+            <p class="font-raleway">
+                Cancer treatment varies based on the type, stage, and individual
+                patient factors. Common treatment methods include:
+            </p>
+            <ul class="list-disc ml-6 font-raleway">
+                <li>
+                    <strong>Surgery:</strong> Removing the tumor or cancerous
+                    tissue.
+                </li>
+                <li>
+                    <strong>Radiation Therapy:</strong> Using high-energy
+                    radiation to kill or shrink cancer cells.
+                </li>
+                <li>
+                    <strong>Chemotherapy:</strong> Using drugs to kill cancer
+                    cells throughout the body.
+                </li>
+                <li>
+                    <strong>Immunotherapy:</strong> Boosting the body’s immune
+                    system to fight cancer.
+                </li>
+                <li>
+                    <strong>Targeted Therapy:</strong> Using drugs that target
+                    specific molecules involved in cancer growth.
+                </li>
+                <li>
+                    <strong>Hormone Therapy:</strong> For cancers that are
+                    driven by hormones, like some breast and prostate cancers.
+                </li>
+            </ul>
+
+            <h3 class="text-xl font-raleway font-semibold mt-4">
+                Living with Cancer
+            </h3>
+            <p class="font-raleway">
+                Receiving a cancer diagnosis can be overwhelming, but there are
+                many resources available to help manage the emotional, physical,
+                and practical aspects of the disease. Support groups,
+                counseling, and palliative care can improve quality of life for
+                patients and their families.
+            </p>
+
+            <h3 class="text-xl font-raleway font-semibold mt-4">
+                Resources for Support
+            </h3>
+            <ul class="list-disc ml-6 font-raleway">
+                <li>
+                    <a
+                        href="https://www.cancer.org"
+                        class="text-accent"
+                        target="_blank"
+                        >American Cancer Society</a
+                    >
+                </li>
+                <li>
+                    <a
+                        href="https://www.cancerresearchuk.org"
+                        class="text-accent"
+                        target="_blank"
+                        >Cancer Research UK</a
+                    >
+                </li>
+                <li>
+                    <a
+                        href="https://www.cancer.gov"
+                        class="text-accent"
+                        target="_blank"
+                        >National Cancer Institute</a
+                    >
+                </li>
+                <li>
+                    <a href="#" class="text-accent">Support Groups</a> (Many
+                    organizations offer online and in-person support groups for
+                    cancer patients and their families.)
+                </li>
+            </ul>
+        </section>
+
+        <hr class="my-6 border-t border-primary opacity-50">
+
+
+        
+        <!-- Modal structure -->
+        <div id="prediction-modal" class="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center hidden">
+            <div id="modal-content" class="bg-background p-6 rounded-lg shadow-lg w-full max-w-md transform transition-all duration-300 scale-90 opacity-0">
+                <!-- Modal Header -->
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-xl font-bold">Prediction Tool</h2>
+                    <button id="close-modal" class="text-text hover:text-accent text-2xl transition duration-300 ease-in-out transform hover:rotate-90">
+                        &times;
+                    </button>
+                </div>
+
+                <!-- Modal Content -->
+                <form id="prediction-form">
+                    <!-- Mean Radius Input -->
+                    <div class="mb-4">
+                        <label for="mean_radius" class="block text-text mb-2">Enter the Mean Radius:</label>
+                        <input type="number" id="mean_radius" placeholder="E.g., 12.34" class="w-full p-2 border bg-background border-gray-300 rounded" required>
+                    </div>
+
+                    <!-- Mean Texture Input -->
+                    <div class="mb-4">
+                        <label for="mean_texture" class="block text-text mb-2">Enter the Mean Texture:</label>
+                        <input type="number" id="mean_texture" placeholder="E.g., 18.56" class="w-full p-2 border bg-background border-gray-300 rounded" required>
+                    </div>
+
+                    <!-- Disclaimer Checkbox -->
+                    <div class="mb-4">
+                        <label class="flex items-start space-x-2 text-sm">
+                            <input type="checkbox" id="disclaimer" class="mt-1" required>
+                            <span class="text-text">
+                                I understand that this tool is for educational purposes only and is not intended to replace professional medical advice. I will consult a healthcare provider for any medical concerns. I acknowledge that the creators of this tool are not responsible for any outcomes resulting from its use.
+                            </span>
+                        </label>
+                    </div>
+
+                    <!-- Predict Button -->
+                    <button type="submit" class="bg-primary text-text py-2 px-4 w-full rounded hover:bg-accent transition duration-300 ease-in-out transform hover:scale-105">
+                        Predict
+                    </button>
+
+                    <!-- Hidden Result Placeholder -->
+                    <p id="prediction-result" class="text-xl font-bold text-center mt-4 hidden"></p>
+                </form>
+            </div>
+        </div>
+
+        <footer class="bg-primary text-text text-center p-4 mt-10">
+            <!-- Centered Content: Made with, Heart, Names -->
+            <div class="flex flex-col items-center">
+                <p class="flex items-center text-lg mb-2">
+                    Made with
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-heart-fill ml-2" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
+                    </svg>
+                    By
+                </p>
+                <p>
+                    <a href="https://www.linkedin.com/in/suddhashil/" target="_blank" class="hover:text-accent">Suddhashil Sarkar</a>
+                </p>
+                <p>Sulagna Mandal</p>
+                <p>Ishita Mondal</p>
+            </div>
+        </footer>
+
+    </body>
+</html>   
