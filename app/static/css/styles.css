@@ -1,0 +1,35 @@
+:root {
+  --background: #252627; /* Dark Gray */
+  --text: #F9E7E7; /* Light Cream */
+  --primary: #BE0E49; /* Bright Red */
+  --secondary: #A81D3D; /* Slightly Darker Red */
+  --accent: #F4A6A3; /* Soft Pink */
+}
+
+.bg-primary {
+  background-color: var(--primary);
+}
+
+.bg-secondary {
+  background-color: var(--secondary);
+}
+
+.bg-accent {
+  background-color: var(--accent);
+}
+
+.bg-background {
+  background-color: var(--background);
+}
+
+.text-text {
+  color: var(--text);
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+h2, h3 {
+  font-family: 'Raleway', sans-serif;
+}
