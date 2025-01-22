@@ -93,15 +93,6 @@ The dataset is sourced from the [UCI Machine Learning Repository](https://archiv
 
 ---
 
-## Evaluation Metrics
-- **Accuracy**: Measures the proportion of correct predictions.
-- **Precision**: Proportion of true positives among all positive predictions.
-- **Recall**: Proportion of true positives among actual positives.
-- **F1-Score**: Harmonic mean of precision and recall.
-- **Confusion Matrix**: Summarizes prediction results.
-
----
-
 ## Authors
 - **Suddhashil Sarkar**
 - **Sulagna Mandal**
