@@ -1,4 +1,4 @@
-# Breast-Cancer-Prediction-using-ML
+# Breast Cancer Prediction using ML
 
 ![Python](https://img.shields.io/badge/Python-3.10-blue)
 ![Flask](https://img.shields.io/badge/Flask-2.3.2-green)
